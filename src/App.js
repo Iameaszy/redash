@@ -1,28 +1,52 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import Home from './pages/home';
 
-export default App;
+import NotFound from './pages/errors/not-found';
+import { connect } from 'react-redux';
+import signin from './pages/auth/signin';
+import signup from './pages/auth/signup';
+import forgotPassword from './pages/auth/forgot-password';
+import passwordReset from './pages/auth/password-reset';
+import VerifyEmail from './pages/auth/verify_email';
+import DefaultLayout from './layouts/default.layout';
+//import ProtectedLayout from './layouts/protected.layout';
+import HomeLayout from './layouts/home.layout';
+import LoadingLayout from './layouts/loading.layout';
+
+const Routes = () => {
+  return (
+    <Router>
+      <Suspense fallback={<LoadingLayout />}>
+        <Switch>
+          <HomeLayout component={Home} exact path="/" />
+          <DefaultLayout
+            component={forgotPassword}
+            exact
+            path="/forgot/password"
+          />
+          <DefaultLayout component={signin} exact path="/session/new" />
+
+          <DefaultLayout
+            component={passwordReset}
+            path="/user/password/reset"
+          />
+
+          <DefaultLayout component={VerifyEmail} path="/user/verify/email" />
+          <Route component={signin} exact path="/signin" />
+          <Route component={signup} exact path="/signup" />
+          <DefaultLayout component={NotFound} />
+        </Switch>
+      </Suspense>
+    </Router>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps)(Routes);
