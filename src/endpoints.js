@@ -1,7 +1,4 @@
-let baseUrl;
-let productionUrl = 'https://server-gzpzstxali.now.sh/api/';
-let devUrl = 'http://localhost:7070/api/';
-baseUrl = process.env.NODE_ENV === 'production' ? productionUrl : devUrl;
+const baseUrl = 'https://us-central1-reckon-b5a4a.cloudfunctions.net/poultry/';
 
 export default {
   BASE: `${baseUrl}`,
@@ -14,12 +11,8 @@ export default {
   FORGOT_PASSWORD: `${baseUrl}user/password/forgot`,
   VERIFY_EMAIL: `${baseUrl}user/email/verify?`,
   GET_EMAIL_VERIFICATION_LINK: `${baseUrl}user/email/send`,
-  ADD_LISTING: `${baseUrl}listing`,
-  DELETE_LISTING: `${baseUrl}listing/`, // id
-  UPDATE_LISTING: `${baseUrl}listing/`, // id
-  FIND_LISTINGS: `${baseUrl}listing`,
-  MAKE_RATING: `${baseUrl}p/rating`,
-  FIND_PUBLIC_LISTINGS: `${baseUrl}p/listing?`,
-  FIND_PUBLIC_LISTINGS_ADVANCED: `${baseUrl}p/a/listing?`,
-  FIND_DATES_TO_IGNORE: `${baseUrl}booking/info`,
+  ADD_FISH: `${baseUrl}`,
+  DELETE_FISH: `${baseUrl}`, // id
+  UPDATE_FISH: `${baseUrl}`, // id
+  GET_FISHES: `${baseUrl}`,
 };

@@ -1,18 +1,29 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  FaHome,
-} from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
+import Modal from 'react-responsive-modal';
 import switchon from '../../assets/switch_on.png';
 import switchoff from '../../assets/switch_off.png';
 import { HomeStyle } from './home.style';
+import Table from './table';
+
+import modalAction from '../../redux/actions/modals';
 
 export class Home extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { toggle: true };
+    this.state = { toggle: true, open: true };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.onOpenModal = this.onOpenModal.bind(this);
+    this.onCloseModal = this.onCloseModal.bind(this);
+  }
+
+  onOpenModal() {
+    this.setState({ open: true });
+  }
+
+  onCloseModal() {
+    this.setState({ open: false });
   }
 
   toggleMenu() {
@@ -40,7 +51,7 @@ export class Home extends React.PureComponent {
           {!toggle && (
           <p
             className="toggle"
-            onClick={(e) => {
+            onClick={() => {
               this.toggleMenu();
             }}
           >
@@ -65,7 +76,7 @@ export class Home extends React.PureComponent {
           </div>
         </div>
         <div className="content">
-          <p>Content</p>
+          <Table />
         </div>
       </HomeStyle>
     );
@@ -73,14 +84,15 @@ export class Home extends React.PureComponent {
 }
 const mapStateToProps = state => ({
   name: state.auth.data.name,
-  listings: state.listing.listings,
-  action_type: state.listing.action_type,
+  fishes: state.fish.fishes,
+  type: state.fish.action,
 });
 
 const mapDispatchToProps = dispatch => ({
+
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withRouter(Home));
+)(Home);

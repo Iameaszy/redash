@@ -3,6 +3,8 @@ const modal_actions = {
   SHOW_SIGNUP: 'SHOW_SIGNUP',
   SHOW_NOTHING: 'SHOW_NOTHING',
   SHOW_PLEASE_LOGIN: 'SHOW_PLEASE_LOGIN',
+  SHOW_EDIT: 'SHOW_EDIT',
+  SHOW_CONFIRM_DELETE: 'SHOW CONFIRM_DELETE',
 };
 
 export default modal_actions;
