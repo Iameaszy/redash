@@ -25,7 +25,11 @@ const Modals = ({ type, data }) => {
     case modal_actions.SHOW_PLEASE_LOGIN:
       return <PleaseLogin />;
     case modal_actions.SHOW_EDIT:
+<<<<<<< HEAD
       return <EditChicken data={data} />;
+=======
+      return <EditChicken {data} />;
+>>>>>>> 60fbd93cb0da11515e20e75b0d09c5eeb07bcc93
     default:
       return null;
   }
